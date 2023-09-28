@@ -18,3 +18,6 @@ check:
 
 build:
 	check poetry build
+
+bi:
+	poetry build ; poetry install
