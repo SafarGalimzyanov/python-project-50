@@ -8,51 +8,25 @@ def get_json_text(file_path: str) -> dict:
     return d
 
 
-@pytest.fixture(name='json_regular')
+DIFF = get_json_text('tests/test_permanent_diff')
+
+
+@pytest.fixture(name='json_1')
 def _json_regular() -> str:
-    return 'tests/fixtures/json_regular.json'
+    return 'tests/fixtures/file1.json'
 
-@pytest.fixture(name='json_same_val')
+@pytest.fixture(name='json_2')
 def _json_regular() -> str:
-    return 'tests/fixtures/json_same_val.json'
+    return 'tests/fixtures/file2.json'
 
-@pytest.fixture(name='json_unique_val')
+@pytest.fixture(name='yaml_1')
 def _json_regular() -> str:
-    return 'tests/fixtures/json_unique_val.json'
+    return 'tests/fixtures/file1.yml'
 
-@pytest.fixture(name='json_unique_pair')
-def _json_unique_pairs() -> str:
-    return 'tests/fixtures/json_unique_pair.json'
-
-@pytest.fixture(name='json_empty')
+@pytest.fixture(name='yaml_2')
 def _json_regular() -> str:
-    return 'tests/fixtures/json_empty.json'
+    return 'tests/fixtures/file2.yml'
 
-
-def test_generate_diff_json():
-    reg_and_same_val =
-    '{\n\n    1k: 1v\n    2k: 1v\n  - 3k: 3v\n  + 3k: 1v\n\n}'
-    reg_and_unique_val =
-    '{\n\n    1k: 1v\n  - 2K: 1v\n  + 2k: 2v\n    3k: 3v\n\n}'
-    reg_and_unique_pair =
-    '{\n\n  + 0k: 0v\n  - 1k: 1v\n  - 2k: 1v\n  + 4k: 1v\n  - 3k: 3v\n  + true: []\n\n}'
-    reg_and_empty =
-    '{\n\n  - 1k: 1v\n  - 2k: 1v\n  - 3k: 3v\n\n}'
-    same_val_and_unique_val =
-    '{\n\n    1k: 1v\n  - 2k: 1v\n  + 2k: 2v\n  - 3k: 1v\n  + 3k: 3v\n\n}'
-    same_val_and_empty =
-    '{\n\n  - 1k: 1v\n  - 2k: 1v\n  - 3k: 1v\n\n}'
-    unique_val_and_empty =
-    '{\n\n  - 1k: 1v\n  - 2k: 2v\n  - 3k: 3v\n\n}'
-
-    assert g_d('json_regular', 'json_same_val') == reg_and_same_val
-    assert g_d('json_regular', 'json_unique_val') == reg_and_unique_val
-    assert g_d('json_regular', 'json_unique') == reg_and_unique_pair
-    assert g_d('json_regular', 'json_empty') == reg_and_empty
-    assert g_d('json_same_val', 'json_unique_val') == same_val_and_unique_val
-    assert g_d('json_same_val', 'json_empty') == same_val_and_empty
-    assert g_d('json_unique_val', 'json_empty') == unique_val_and_empty
-
-
-
-print(g_d(json_regular, json_regular))
+def test_generate_diff():
+    assert g_d('json_1', 'json_2') == DIFF
+    assert g_d('yaml_1', 'yaml_2') == DIFF
