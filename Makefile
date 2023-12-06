@@ -19,7 +19,10 @@ check:
 build:
 	check poetry build
 
-bi:
+p-i:
+	pip install .
+
+b-i:
 	poetry build ; poetry install
 
 l-g:
@@ -33,9 +36,5 @@ l-t:
 
 v-t:
 	vim tests/test_gendiff.py
-
-r:
-	poetry run gendiff
-
-t:
+r-tt:
 	poetry run python3 -m tests.test_gendiff

@@ -3,3 +3,9 @@ __pycache__/
 _temp/
 dist/
 github-actions-demo.yml
+tests/fixtures/json/
+tests/fixtures/yaml/
+f1.json
+f2.json
+f1.yml
+f2.yaml
