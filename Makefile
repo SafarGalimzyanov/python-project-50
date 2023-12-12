@@ -23,7 +23,10 @@ p-i:
 	pip install .
 
 b-i:
-	poetry build ; poetry install
+	python3 -m pip install --user dist/*.whl --force-reinstall ; poetry build ; poetry install ; gendiff f1.json f2.json ; gendiff f1.yml f2.yaml
+
+s:
+	vim gendiff/scripts/gendiff_script.py
 
 l-g:
 	poetry run flake8 gendiff
@@ -36,5 +39,9 @@ l-t:
 
 v-t:
 	vim tests/test_gendiff.py
-r-tt:
+
+r-t:
 	poetry run python3 -m tests.test_gendiff
+
+t:
+	gendiff f1.json f2.json
