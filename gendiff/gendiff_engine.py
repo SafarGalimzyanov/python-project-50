@@ -1,4 +1,4 @@
-def generate_diff(d1: dict, d2: dict) -> str:
+def generate_diff(d1: dict, d2: dict={}) -> str:
     d_in1_in2, d_in1 = dict(), dict()
     for key in d1:
         d = {key: d1.get(key)}
@@ -8,16 +8,19 @@ def generate_diff(d1: dict, d2: dict) -> str:
         else:
             d_in1.update(d)
 
-    keys = sorted(list(d_in1_in2.keys()) + list(d_in1.keys()) + list(d2.keys()))
+    keys = set(d_in1_in2.keys())
+    keys.update(set(d_in1.keys()))
+    keys.update(set(d2.keys()))
+    
     start = '{\n\n'
     end = '\n}'
     result = ''
-    for key in keys:
+    for key in sorted(keys):
         if key in d_in1:
             result += f'  - {key}: {d_in1.get(key)}\n'
-        elif key in d2:
+        if key in d2:
             result += f'  + {key}: {d2.get(key)}\n'
-        else:
+        if key in d_in1_in2:
             result += f'    {key}: {d_in1_in2.get(key)}\n'
             
     return start + result + end

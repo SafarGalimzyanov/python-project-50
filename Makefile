@@ -44,4 +44,4 @@ r-t:
 	poetry run python3 -m tests.test_gendiff
 
 t:
-	gendiff f1.json f2.json
+	python3 -m pip install --user dist/*.whl --force-reinstall ; poetry build ; poetry install ; pytest

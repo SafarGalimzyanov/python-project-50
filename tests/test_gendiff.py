@@ -1,32 +1,35 @@
+import json, yaml
 import pytest
-from gendiff.gendiff import generate_diff as g_d
+from gendiff.gendiff_engine import generate_diff
+from gendiff.gendiff_parse import generate_parse
 
 
-def get_json_text(file_path: str) -> dict:
+def get_text(file_path: str):
     with open(file_path, 'r') as f:
-        d = json.load(f)
-    return d
+        data = f.read()
+    return data.strip()
 
 
-DIFF = get_json_text('tests/test_permanent_diff')
-
+DIFF = get_text('tests/fixtures/test_permanent_diff')
+#json_1 = {'host': 'hexlet.io', 'timeout': 50, 'proxy': '123.234.53.22', 'follow': False}
+#json_2 = {'timeout': 20, 'verbose': True, 'host': 'hexlet.io'}
 
 @pytest.fixture(name='json_1')
-def _json_regular() -> str:
+def j_1() -> str:
     return 'tests/fixtures/file1.json'
 
 @pytest.fixture(name='json_2')
-def _json_regular() -> str:
+def j_2() -> str:
     return 'tests/fixtures/file2.json'
 
 @pytest.fixture(name='yaml_1')
-def _json_regular() -> str:
+def y_1() -> str:
     return 'tests/fixtures/file1.yml'
 
 @pytest.fixture(name='yaml_2')
-def _json_regular() -> str:
+def y_2() -> str:
     return 'tests/fixtures/file2.yml'
 
-def test_generate_diff():
-    assert g_d('json_1', 'json_2') == DIFF
-    assert g_d('yaml_1', 'yaml_2') == DIFF
+def test_generate_diff(json_1, json_2, yaml_1, yaml_2):
+    assert generate_diff(*generate_parse(json_1, json_2)) == DIFF
+    assert generate_diff(*generate_parse(yaml_1, yaml_2)) == DIFF
