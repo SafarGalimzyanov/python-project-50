@@ -5,10 +5,10 @@ test:
 	poetry run pytest
 
 test-coverage:
-	poetry run pytest ...
+	poetry run pytest --cov=hexlet_python_package --cov-report xml
 
 lint:
-	poetry run flake8 gendiff
+	poetry run flake8 hexlet_python_package
 
 selfcheck:
 	poetry check
@@ -17,10 +17,8 @@ check:
 	selfcheck test lint
 
 build:
-	check poetry build
-
-p-i:
-	pip install .
+	check
+	poetry build
 
 b-i:
 	python3 -m pip install --user dist/*.whl --force-reinstall ; poetry build ; poetry install ; gendiff f1.json f2.json ; gendiff f1.yml f2.yaml
@@ -44,4 +42,5 @@ r-t:
 	poetry run python3 -m tests.test_gendiff
 
 t:
-	python3 -m pip install --user dist/*.whl --force-reinstall ; poetry build ; poetry install ; pytest
+	python3 -m pip install --user dist/*.whl --force-reinstall ; poetry build ; poetry install ;install:
+	poetry install
