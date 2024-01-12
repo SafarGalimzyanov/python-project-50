@@ -13,13 +13,10 @@ lint:
 selfcheck:
 	poetry check
 
-check:
-	selfcheck test lint
+check: selfcheck test lint
 
-build:
-	check
+build: check
 	poetry build
-
 b-i:
 	python3 -m pip install --user dist/*.whl --force-reinstall ; poetry build ; poetry install ; gendiff f1.json f2.json ; gendiff f1.yml f2.yaml
 
