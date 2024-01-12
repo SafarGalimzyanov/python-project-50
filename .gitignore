@@ -10,3 +10,4 @@ f2.json
 f1.yml
 f2.yaml
 yaml_gendiff.py
+.github/workflows/mail.yml
