@@ -5,10 +5,10 @@ test:
 	poetry run pytest
 
 test-coverage:
-	poetry run pytest --cov=second_project --cov-report xml
+	poetry run pytest --cov=. --cov-report xml
 
 lint:
-	poetry run flake8 second_project
+	poetry run flake8 .
 
 selfcheck:
 	poetry check
