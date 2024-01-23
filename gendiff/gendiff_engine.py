@@ -20,19 +20,34 @@ def generate_tree(d1: dict, d2: dict={}) -> str:
     start = '{\n\n'
     end = '\n}'
     def inner(d1, d2, result):
-        d_in1_in2, d_in1 = dict(), dict()
+        d_in1_in2, d_in1, d_in2, d_check = dict(), dict(), dict(), dict()
+        for key in d2:
+            if key not in d1:
+                d_in2.update({key: d2.get(key)})
+
         for key in d1:
             d = {key: d1.get(key)}
-            if d1.get(key) == d2.get(key):
-                d_in1_in2.update(d)
-                d2.pop(key)
-            else:
+            if key not in d2:
                 d_in1.update(d)
+            elif d1.get(key) == d2.get(key):
+                d_in1_in2.update(d)
+            else:
+                d_check.update(d)
 
+        for key in d_check:
+'''
         keys = set(d_in1_in2.keys())
         keys.update(set(d_in1.keys()))
         keys.update(set(d2.keys()))
-        
+
+        for key in sorted(keys):
+            if key in d_in1:
+                result += f'  - {key}: {d_in1.get(key)}\n'
+            if key in d2:
+                result += f'  + {key}: {d2.get(key)}\n'
+            if key in d_in1_in2:
+                result += f'    {key}: {d_in1_in2.get(key)}\n'
+'''             
 
     inner(d1, d2)
     return start + result + end
