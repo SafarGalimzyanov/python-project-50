@@ -3,7 +3,7 @@
 
 import argparse
 import gendiff.gendiff_info as gendiff_info
-from gendiff.gendiff_engine import generate_diff
+from gendiff.gendiff_engine import generate_output
 from gendiff.gendiff_parse import generate_parse
 
 
@@ -13,7 +13,7 @@ def main():
    parser.add_argument('file2', metavar=gendiff_info.POS_ARGS['second_arg']) #?
    parser.add_argument('-f', '--format', dest='format', action='store', default=generate_parse, help='set CHICKEN format of output')
    args = parser.parse_args()
-   print(generate_diff(*args.format(args.file1, args.file2)))
+   print(generate_output(*args.format(args.file1, args.file2)))
 
 
 if __name__ == '__main__':
