@@ -13,7 +13,7 @@ def main():
    parser.add_argument('file2', metavar=gendiff_info.POS_ARGS['second_arg']) #?
    parser.add_argument('-f', '--format', dest='format', action='store', default=generate_parse, help='set CHICKEN format of output')
    args = parser.parse_args()
-   print(generate_output(*args.format(args.file1, args.file2)))
+   print(generate_output(*args.format(args.file1, args.file2, args.format)))
 
 
 if __name__ == '__main__':

@@ -2,11 +2,12 @@
 name = "hexlet-code"
 version = "0.1.0"
 description = ""
-authors = ["Safar Galimzyanov <you@example.com>"]
+authors = ["Safar Galimzyanov <safargalimzyanov@protonme.com>"]
 readme = "README.md"
 packages = [
 	{ include = "gendiff" },
-	{ include = "tests"}
+	{ include = "tests"},
+	{ include = "stylish"}
 ]
 
 [tool.poetry.dependencies]
