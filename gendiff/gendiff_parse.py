@@ -1,6 +1,6 @@
 import json, yaml
 from typing import TextIO
-from stylish.stylize import stylize
+
 
 def generate_parse(file1_path: str, file2_path: str, print_format: str='') -> str:
     file_format = file1_path.split('.')[-1] #get str after dot -> json or yaml/yml
