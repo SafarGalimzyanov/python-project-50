@@ -1,5 +1,4 @@
-from copy import deepcopy
-from stylish.stylize import added, removed, same, updated
+from stylish.stylize import added, removed, updated, same
 
 
 def compare_files(d1, d2, style: str, depth: int=4, space: int=2) -> str:
