@@ -6,9 +6,15 @@ github-actions-demo.yml
 tests/fixtures/json/
 tests/fixtures/yaml/
 f1.json
+F1.json
 f2.json
+F2.json
 f1.yml
+F1.yml
 f2.yaml
+F2.yaml
 yaml_gendiff.py
 .github/workflows/mail.yml
 gendiff/yaml_gendiff.py
+tests/fixtures/yaml
+tests/fixtures/json

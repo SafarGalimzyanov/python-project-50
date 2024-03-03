@@ -17,26 +17,10 @@ check: selfcheck test lint
 
 build: check
 	poetry build
-b-i:
-	poetry build ; poetry install ; python3 -m pip install --user dist/*.whl --force-reinstall ; gendiff F1.json F2.json ; gendiff F1.yaml F2.yaml 
-s:
-	vim gendiff/scripts/gendiff_script.py
-
-l-g:
-	poetry run flake8 gendiff
-
-v-g:
-	vim gendiff/gendiff.py
-
-l-t:
-	poetry run flake8 tests
-
-v-t:
-	vim tests/test_gendiff.py
-
-r-t:
-	poetry run python3 -m tests.test_gendiff
-
+b:
+	poetry build ; poetry install ; python3 -m pip install --user dist/*.whl --force-reinstall ; gendiff F1.json F2.json 
 t:
-	python3 -m pip install --user dist/*.whl --force-reinstall ; poetry build ; poetry install ;install:
-	poetry install
+	tree -I __*__***
+
+g:	b
+	echo --------------- ; gendiff -f plain F1.json F2.json
