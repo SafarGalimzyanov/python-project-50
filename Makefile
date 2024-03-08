@@ -22,5 +22,8 @@ b:
 t:
 	tree -I __*__***
 
-g:	b
+g:	
 	echo --------------- ; gendiff -f plain F1.json F2.json
+
+te:
+	pytest

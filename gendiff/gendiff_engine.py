@@ -17,7 +17,7 @@ def compare_files(d1, d2, style: str, depth: int=4, space: int=2, ancestors: str
                 if v1 != v2: #special
                     result += f"{indent}  {key}: {'{'}\n"
                     result += compare_files(v1, v2, style, depth+4, space+4, ancestors+curr_key)
-                    result += f"{indent} {'}'}\n"
+                    result += f"{indent}  {'}'}\n"
                 else:
                     result += same(key, v1, style, depth, indent, ancestors+curr_key)
                     #result = f'{default}{key}{print_dict(v1, depth+4)}' 
@@ -46,4 +46,4 @@ def compare_files(d1, d2, style: str, depth: int=4, space: int=2, ancestors: str
     return result
 
 def generate_diff(d1: dict={}, d2: dict={}, style: str="") -> str:
-    return compare_files(d1, d2, style)
+    return '{\n' + compare_files(d1, d2, style) + '}'

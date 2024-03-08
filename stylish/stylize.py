@@ -1,8 +1,21 @@
+def check_value(v):
+    match v:
+        case None:
+            v = 'null'
+        case True:
+            v = 'true'
+        case False:
+            v = 'false'
+
+    return v
+
 def dict_to_str(d, depth) -> str:
     result = ": {\n"
     indent = depth*" "
     for key in d:
         v = d.get(key)
+        v = check_value(v)
+
         key_v = f"{key}: {v}"
         if type(v) is dict:
             result += f"{indent}{key}{dict_to_str(v, depth+4)}\n"
@@ -14,6 +27,8 @@ def dict_to_str(d, depth) -> str:
 
 def added(key, v2, style, depth, indent, ancestors) -> str:
     key_in_dict2 = indent + "+ "
+    v2 = check_value(v2)
+
     key_v2 = f"{key}: {v2}"
 
     if style != "plain":
@@ -30,6 +45,8 @@ def added(key, v2, style, depth, indent, ancestors) -> str:
 
 def removed(key, v1, style, depth, indent, ancestors) -> str:
     key_in_dict1 = indent + "- "
+    v1 = check_value(v1)
+
     key_v1 = f"{key}: {v1}"
 
     if style != "plain":
@@ -47,11 +64,19 @@ def removed(key, v1, style, depth, indent, ancestors) -> str:
 def updated(key, v1, v2, style, depth, indent, ancestors) -> str:
     key_in_dict1 = indent + "- "
     key_in_dict2 = indent + "+ "
+    v1 = check_value(v1)
+    v2 = check_value(v2)
+
     key_v1 = f"{key}: {v1}"
     key_v2 = f"{key}: {v2}"
 
     if style != "plain":
-        return f"{key_in_dict1}{key_v1}\n{key_in_dict2}{key_v2}\n"
+        if type(v1) is dict:
+            return f"{key_in_dict1}{key}{dict_to_str(v1, depth+4)}\n{key_in_dict2}{key_v2}\n"
+        elif type(v2) is dict:
+            return f"{key_in_dict1}{key_v1}\n{key_in_dict2}{key}{dict_to_str(v2, depth+4)}\n"
+        else:
+            return f"{key_in_dict1}{key_v1}\n{key_in_dict2}{key_v2}\n"
     else:
         if type(v1) is dict:
             return f"Property '{ancestors[1:]}' was updated from [complex value] to {v2}\n"
@@ -63,10 +88,10 @@ def updated(key, v1, v2, style, depth, indent, ancestors) -> str:
 
 
 def same(key, v1, style, depth, indent, ancestors) -> str:
-    return ''
     default = indent + "  "
-    key_v1 = f"{key}: {v1}"
+    v1 = check_value(v1)
 
+    key_v1 = f"{key}: {v1}"
     if style != "plain":
         if type(v1) is dict:
             return f"{default}{key}{dict_to_str(v1, depth+4)}\n"
