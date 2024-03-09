@@ -7,7 +7,7 @@ readme = "README.md"
 packages = [
 	{ include = "gendiff" },
 	{ include = "tests"},
-	{ include = "stylish"}
+	{ include = "style"}
 ]
 
 [tool.poetry.dependencies]

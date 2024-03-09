@@ -29,8 +29,6 @@ def test_gendiff_json_plain_style():
 
 def test_gendiff_yaml_plain_style():
     assert generate_diff(*generate_parse(YAML_1, YAML_2, 'plain')) == DIFF_PLAIN_FORMAT
-'''
-def test_gendiff_json_json_style():
 
-    assert generate_output(*generate_parse(json_1, json_2, '--json')) == DIFF_JSON_FORMAT
-'''
+def test_gendiff_json_json_style():
+    assert generate_diff(*generate_parse(JSON_1, JSON_2, 'json')) == DIFF_JSON_FORMAT
