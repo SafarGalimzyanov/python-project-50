@@ -9,9 +9,11 @@ The project features an instrument of comparing two text files (.json and .yml).
 
 The comparison can be displayed differently:
 
- - plain
+ - default: '-' for removed, '+' for added information
 
- - stylish
+ - plain: property was removed, added or updated from one value to another
+
+ - json: json format
 
 
 Installation:

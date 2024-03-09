@@ -5,21 +5,20 @@ from style.stylize import get_result
 def get_json(d1, d2):
     return json.dumps({'file1': d1, 'file2': d2})
 
-def compare(d1, d2, style: str, depth: int = 4, space_count: int = 2, ancestors: str = '') -> str:
+
+def compare(d1, d2, style: str, depth: int = 4, indent: str = 2*' ', ancestors: str = '') -> str:
     result = ''
     keys = sorted(tuple(set(d1.keys()).union(set(d2.keys()))))
-    indent = space_count*' '
     for key in keys:
-        curr_key = '.' + str(key)
         v1 = d1.get(key)
         v2 = d2.get(key)
-        params = (key, v1, v2, style, depth, indent, ancestors+curr_key)
+        params = (key, v1, v2, style, depth, indent, ancestors + '.' + str(key))
 
         if key in d1 and key in d2:
             if v1 != v2:
                 if type(v1) is dict and type(v2) is dict:
                     result += f'{indent}  {key}: {"{"}\n' if style != 'plain' else ''
-                    result += compare(v1, v2, style, depth+4, space_count+4, ancestors+curr_key)
+                    result += compare(v1, v2, style, depth+4, indent+4*' ', ancestors + '.' + str(key))
                     result += f'{indent}  {"}"}\n' if style != 'plain' else ''
                 else:
                     result += get_result(params, 'updated')
@@ -33,7 +32,7 @@ def compare(d1, d2, style: str, depth: int = 4, space_count: int = 2, ancestors:
     return result
 
 
-def generate_diff(d1: dict = {}, d2: dict = {}, style: str=''):
+def generate_diff(d1: dict = {}, d2: dict = {}, style: str = ''):
     match style:
         case 'plain':
             return compare(d1, d2, 'plain')[:-1]
