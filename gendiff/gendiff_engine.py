@@ -15,9 +15,9 @@ def compare_files(d1, d2, style: str, depth: int=4, space: int=2, ancestors: str
         if key in d1 and key in d2: #same keys
             if type(v1) is dict and type(v2) is dict:
                 if v1 != v2: #special
-                    result += f"{indent}  {key}: {'{'}\n"
+                    result += f"{indent}  {key}: {'{'}\n" if style != 'plain' else ''
                     result += compare_files(v1, v2, style, depth+4, space+4, ancestors+curr_key)
-                    result += f"{indent}  {'}'}\n"
+                    result += f"{indent}  {'}'}\n" if style != 'plain' else ''
                 else:
                     result += same(key, v1, style, depth, indent, ancestors+curr_key)
                     #result = f'{default}{key}{print_dict(v1, depth+4)}' 
@@ -45,5 +45,11 @@ def compare_files(d1, d2, style: str, depth: int=4, space: int=2, ancestors: str
 
     return result
 
-def generate_diff(d1: dict={}, d2: dict={}, style: str="") -> str:
-    return '{\n' + compare_files(d1, d2, style) + '}'
+def generate_diff(d1: dict={}, d2: dict={}, style: str='') -> str:
+    match style:
+        case 'plain':
+            return compare_files(d1, d2, 'plain')[:-1]
+        case 'json':
+            return json.dumps(compare_files(d1, d2, 'json'))
+        case _:
+            return '{\n' + compare_files(d1, d2, 'default') + '}'

@@ -1,4 +1,6 @@
-def check_value(v):
+def check_value(v, style: str=''):
+    if style == 'plain' and type(v) is str:
+        v = f"'{v}'"
     match v:
         case None:
             v = 'null'
@@ -27,7 +29,9 @@ def dict_to_str(d, depth) -> str:
 
 def added(key, v2, style, depth, indent, ancestors) -> str:
     key_in_dict2 = indent + "+ "
-    v2 = check_value(v2)
+    #if type(v2) is str:
+        #v2 = f"'{v2}'"
+    v2 = check_value(v2, style)
 
     key_v2 = f"{key}: {v2}"
 
@@ -38,9 +42,9 @@ def added(key, v2, style, depth, indent, ancestors) -> str:
             return f"{key_in_dict2}{key_v2}\n"
     else:
         if type(v2) is dict:
-            return f"Property '{ancestors[1:]}' was added with the value: [complex value]\n"
+            return f"Property '{ancestors[1:]}' was added with value: [complex value]\n"
         else:
-            return f"Property '{ancestors[1:]}' was added with the value: {v2}\n"
+            return f"Property '{ancestors[1:]}' was added with value: {v2}\n"
 
 
 def removed(key, v1, style, depth, indent, ancestors) -> str:
@@ -64,8 +68,12 @@ def removed(key, v1, style, depth, indent, ancestors) -> str:
 def updated(key, v1, v2, style, depth, indent, ancestors) -> str:
     key_in_dict1 = indent + "- "
     key_in_dict2 = indent + "+ "
-    v1 = check_value(v1)
-    v2 = check_value(v2)
+    #if type(v1) is str:
+    #    v1 = f"'{v1}'"
+    #if type(v2) is str:
+    #    v2 = f"'{v2}'"
+    v1 = check_value(v1, style)
+    v2 = check_value(v2, style)
 
     key_v1 = f"{key}: {v1}"
     key_v2 = f"{key}: {v2}"
@@ -79,11 +87,11 @@ def updated(key, v1, v2, style, depth, indent, ancestors) -> str:
             return f"{key_in_dict1}{key_v1}\n{key_in_dict2}{key_v2}\n"
     else:
         if type(v1) is dict:
-            return f"Property '{ancestors[1:]}' was updated from [complex value] to {v2}\n"
+            return f"Property '{ancestors[1:]}' was updated. From [complex value] to {v2}\n"
         elif type(v2) is dict:
-            return f"Property '{ancestors[1:]}' was updated from {v1} to [complex value]\n"
+            return f"Property '{ancestors[1:]}' was updated. From {v1} to [complex value]\n"
         else:
-            return f"Property '{ancestors[1:]}' was updated from {v1} to {v2}\n"
+            return f"Property '{ancestors[1:]}' was updated. From {v1} to {v2}\n"
 
 
 
