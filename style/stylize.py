@@ -3,6 +3,7 @@ REMOVED = '- '
 SAME = '  '
 DEF_INDENT = 4*' '
 
+
 def check_value(v, style: str = ''):
     if style == 'plain' and type(v) is str:
         v = f"'{v}'"
@@ -35,51 +36,53 @@ def dict_to_str(d: dict, indent: str) -> str:
 
 
 def added(key, v2, style, indent, ancestors) -> str:
-    key_v2 = f'{key}: {v2}'
+    default = f'{indent}{ADDED}{key}'
+    plain = f"Property '{ancestors[1:]}' was added with value: "
 
     if style != 'plain':
         if type(v2) is dict:
-            return f'{indent}{ADDED}{key}{dict_to_str(v2, indent)}\n'
-        return f'{indent}{ADDED}{key_v2}\n'
+            return f'{default}{dict_to_str(v2, indent)}\n'
+        return f'{default}: {v2}\n'
     if type(v2) is dict:
-        return f"Property '{ancestors[1:]}' was added with value: [complex value]\n"
-    return f"Property '{ancestors[1:]}' was added with value: {v2}\n"
+        return f'{plain}[complex value]\n'
+    return f'{plain}{v2}\n'
 
 
 def removed(key, v1, style, indent, ancestors) -> str:
-    key_v1 = f'{key}: {v1}'
+    default = f'{indent}{REMOVED}{key}'
+    plain = f"Property '{ancestors[1:]}' was removed"
 
     if style != 'plain':
         if type(v1) is dict:
-            return f'{indent}{REMOVED}{key}{dict_to_str(v1, indent)}\n'
-        return f'{indent}{REMOVED}{key_v1}\n'
-    return f"Property '{ancestors[1:]}' was removed\n"
+            return f'{default}{dict_to_str(v1, indent)}\n'
+        return f'{default}: {v1}\n'
+    return f'{plain}\n'
 
 
 def updated(key, v1, v2, style, indent, ancestors) -> str:
-    key_v1 = f'{key}: {v1}'
-    key_v2 = f'{key}: {v2}'
+    default_removed = f'{indent}{REMOVED}{key}'
+    default_added = f'{indent}{ADDED}{key}'
+    plain = f"Property '{ancestors[1:]}' was updated. From "
 
     if style != 'plain':
         if type(v1) is dict:
-            return f'{indent}{REMOVED}{key}{dict_to_str(v1, indent)}\n{indent}{ADDED}{key_v2}\n'
+            return f'{default_removed}{dict_to_str(v1, indent)}\n{default_added}: {v2}\n'
         if type(v2) is dict:
-            return f'{indent}{REMOVED}{key_v1}\n{indent}{ADDED}{key}{dict_to_str(v2, indent)}\n'
-        return f'{indent}{REMOVED}{key_v1}\n{indent}{ADDED}{key_v2}\n'
+            return f'{default_removed}: {v1}\n{default_added}{dict_to_str(v2, indent)}\n'
+        return f'{default_removed}: {v1}\n{default_added}: {v2}\n'
     if type(v1) is dict:
-        return f"Property '{ancestors[1:]}' was updated. From [complex value] to {v2}\n"
+        return f'{plain}[complex value] to {v2}\n'
     if type(v2) is dict:
-        return f"Property '{ancestors[1:]}' was updated. From {v1} to [complex value]\n"
-    return f"Property '{ancestors[1:]}' was updated. From {v1} to {v2}\n"
+        return f'{plain}{v1} to [complex value]\n'
+    return f'{plain}{v1} to {v2}\n'
 
 
 def same(key, v1, style, indent, ancestors) -> str:
-    key_v1 = f'{key}: {v1}'
-
+    default = f'{indent}{SAME}{key}'
     if style != 'plain':
         if type(v1) is dict:
-            return f'{indent}{SAME}{key}{dict_to_str(v1, indent)}\n'
-        return f'{indent}{SAME}{key_v1}\n'
+            return f'{default}{dict_to_str(v1, indent)}\n'
+        return f'{default}: {v1}\n'
     return ''
 
 

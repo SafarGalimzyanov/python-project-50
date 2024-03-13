@@ -6,7 +6,7 @@ def get_json(d1, d2):
     return json.dumps({'file1': d1, 'file2': d2})
 
 
-def get_dict(key, v1, v2, style, indent, ancestors):
+def get_dict(key, v1: dict, v2: dict, style: str, indent: str, ancestors: str) -> str:
     start, end = '', ''
     if style != 'plain':
         start = f'{indent}  {key}: {"{"}\n'
@@ -14,7 +14,7 @@ def get_dict(key, v1, v2, style, indent, ancestors):
     return start + compare(v1, v2, style, indent+4*' ', ancestors + '.' + str(key)) + end
 
 
-def compare(d1, d2, style: str, indent: str = 2*' ', ancestors: str = '') -> str:
+def compare(d1: dict, d2: dict, style: str, indent: str = 2*' ', ancestors: str = '') -> str:
     result = ''
     keys = sorted(tuple(set(d1.keys()).union(set(d2.keys()))))
     for key in keys:
