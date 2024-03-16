@@ -31,3 +31,13 @@ Installation:
 
 
 Examples:
+1) default json
+[![asciicast](https://asciinema.org/a/646787.svg)](https://asciinema.org/a/646787)
+2) default yaml
+[![asciicast](https://asciinema.org/a/646788.svg)](https://asciinema.org/a/646788)
+3) plain json
+[![asciicast](https://asciinema.org/a/646790.svg)](https://asciinema.org/a/646790)
+4) plain yaml
+[![asciicast](https://asciinema.org/a/646792.svg)](https://asciinema.org/a/646792)
+5) json output
+[![asciicast](https://asciinema.org/a/646793.svg)](https://asciinema.org/a/646793)
