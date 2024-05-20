@@ -1,6 +1,6 @@
 import json, yaml
 import pytest
-from gendiff.gendiff_engine import generate_diff
+from gendiff.gendiff import generate_diff
 from gendiff.gendiff_parse import generate_parse
 
 
