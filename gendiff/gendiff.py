@@ -45,3 +45,6 @@ def generate_diff(d1: dict = {}, d2: dict = {}, style: str = ''):
             return get_json(d1, d2)
         case _:
             return '{\n' + compare(d1, d2, '') + '}'
+
+
+__all__ = ['generate_diff']
