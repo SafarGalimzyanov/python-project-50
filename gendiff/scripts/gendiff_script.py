@@ -12,7 +12,7 @@ def main():
     args = parser.parse_args()
     result = generate_diff(args.file1, args.file2, args.format)
     
-    return result
+    print(result)
 
 
 if __name__ == '__main__':

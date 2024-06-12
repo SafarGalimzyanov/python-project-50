@@ -2,6 +2,7 @@ import json, yaml
 import pytest
 from gendiff import generate_diff
 
+
 def get_text(file_path: str):
     with open(file_path, 'r') as f:
         data = f.read()
