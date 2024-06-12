@@ -1,8 +1,6 @@
 import json, yaml
 import pytest
-from gendiff.gendiff import generate_diff
-from gendiff.gendiff_parse import generate_parse
-
+from gendiff import generate_diff
 
 def get_text(file_path: str):
     with open(file_path, 'r') as f:
