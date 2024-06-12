@@ -12,10 +12,10 @@ def get_dict(key, v1: dict, v2: dict, style: str, indent: str, ancestors: str) -
     if style != 'plain':
         start = f'{indent}  {key}: {"{"}\n'
         end = f'{indent}  {"}"}\n'
-    return start + compare(v1, v2, style, indent+4*' ', ancestors + '.' + str(key)) + end
+    return start + compare(v1, v2, style, indent + 4 * ' ', ancestors + '.' + str(key)) + end
 
 
-def compare(d1: dict, d2: dict, style: str, indent: str = 2*' ', ancestors: str = '') -> str:
+def compare(d1: dict, d2: dict, style: str, indent: str = 2 * ' ', ancestors: str = '') -> str:
     result = ''
     keys = sorted(tuple(set(d1.keys()).union(set(d2.keys()))))
     for key in keys:
@@ -38,7 +38,7 @@ def compare(d1: dict, d2: dict, style: str, indent: str = 2*' ', ancestors: str 
     return result
 
 
-def generate_diff(file1_path: str, file2_path:str, style: str = ''):
+def generate_diff(file1_path: str, file2_path: str, style: str = ''):
     def inner(file1_path: str, file2_path: str) -> str:
         file_format = file1_path.split('.')[-1]
         with open(file1_path, 'r') as f1, open(file2_path, 'r') as f2:

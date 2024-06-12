@@ -1,4 +1,3 @@
-import json, yaml
 import pytest
 from gendiff import generate_diff
 
@@ -17,17 +16,22 @@ JSON_2 = 'tests/fixtures/json/file2.json'
 YAML_1 = 'tests/fixtures/yaml/file1.yml'
 YAML_2 = 'tests/fixtures/yaml/file2.yaml'
 
+
 def test_gendiff_json_default_style():
     assert generate_diff(JSON_1, JSON_2) == DIFF_DEFAULT_FORMAT
+
 
 def test_gendiff_yaml_default_style():
     assert generate_diff(YAML_1, YAML_2) == DIFF_DEFAULT_FORMAT
 
+
 def test_gendiff_json_plain_style():
     assert generate_diff(JSON_1, JSON_2, 'plain') == DIFF_PLAIN_FORMAT
 
+
 def test_gendiff_yaml_plain_style():
     assert generate_diff(YAML_1, YAML_2, 'plain') == DIFF_PLAIN_FORMAT
+
 
 def test_gendiff_json_json_style():
     assert generate_diff(JSON_1, JSON_2, 'json') == DIFF_JSON_FORMAT

@@ -1,7 +1,7 @@
 ADDED = '+ '
 REMOVED = '- '
 SAME = '  '
-DEF_INDENT = 4*' '
+DEF_INDENT = 4 * ' '
 
 
 def check_value(v, style: str = ''):
