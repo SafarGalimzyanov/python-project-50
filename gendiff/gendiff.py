@@ -1,12 +1,12 @@
 import json
 import yaml
-from style.stylize import get_result
+from uniform import uniform
+from stylize import stylize
 
 
-def get_json(d1, d2):
-    return json.dumps({'file1': d1, 'file2': d2})
 
 
+'''
 def get_dict(key, v1: dict, v2: dict, style: str, indent: str, ancestors: str) -> str:
     start, end = '', ''
     if style != 'plain':
@@ -28,25 +28,29 @@ def compare(d1: dict, d2: dict, style: str, indent: str = 2 * ' ', ancestors: st
                 if type(v1) is dict and type(v2) is dict:
                     result += get_dict(key, v1, v2, style, indent, ancestors)
                 else:
-                    result += get_result(params, 'updated')
+                    result += stylize(params, 'updated')
             else:
-                result += get_result(params, 'same')
+                result += stylize(params, 'same')
         elif key in d1 and key not in d2:
-            result += get_result(params, 'removed')
+            result += stylize(params, 'removed')
         else:
-            result += get_result(params, 'added')
+            result += stylize(params, 'added')
     return result
-
+'''
 
 def generate_diff(file1_path: str, file2_path: str, style: str = ''):
-    def inner(file1_path: str, file2_path: str) -> str:
+    def load(file1_path: str, file2_path: str) -> str:
         file_format = file1_path.split('.')[-1]
         with open(file1_path, 'r') as f1, open(file2_path, 'r') as f2:
             if file_format in ('yaml', 'yml'):
                 return yaml.safe_load(f1), yaml.safe_load(f2)
             return json.load(f1), json.load(f2)
 
-    d1, d2 = inner(file1_path, file2_path)
+    d1, d2 = load(file1_path, file2_path)
+    return stylize(uniform(d1, d2), style)
+
+'''
+#уходит в stylize там 3 функции plain json other
     match style:
         case 'plain':
             return compare(d1, d2, 'plain')[:-1]
@@ -54,3 +58,4 @@ def generate_diff(file1_path: str, file2_path: str, style: str = ''):
             return get_json(d1, d2)
         case _:
             return '{\n' + compare(d1, d2, '') + '}'
+    '''

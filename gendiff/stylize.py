@@ -1,12 +1,46 @@
+from styles.plain import plain
+from styles.regular import regular
+from styles.json import json_
+
+
+def stylize(uniformed_dicts: list=[], style: str) -> str:
+    styles = {
+            'plain': plain,
+            'regular': regular,
+            'json': json_
+            }
+    return styles.get(style)(uniformed_dicts)
+
+
+
+'''
+dicts:
+start = f'{indent}  {key}: {"{"}\n'
+end = f'{indent}  {"}"}\n'
+'''
+
+'''
 ADDED = '+ '
 REMOVED = '- '
 SAME = '  '
 DEF_INDENT = 4 * ' '
 
 
+def plain(d: dict) -> str:
+    ...
+
+def json(d1, d2):
+    return json.dumps({'file1': d1, 'file2': d2})
+
+def other(d: dict) -> str:
+    ...
+
+
 def check_value(v, style: str = ''):
+    #not used with plain, so this 'if' is redundant
     if style == 'plain' and type(v) is str:
         v = f"'{v}'"
+
     match v:
         case None:
             v = 'null'
@@ -33,8 +67,8 @@ def dict_to_str(d: dict, indent: str) -> str:
     result += indent[2:] + '}'
 
     return result
-
-
+'''
+'''
 def added(key, v2, style, indent, ancestors) -> str:
     default = f'{indent}{ADDED}{key}'
     plain = f"Property '{ancestors[1:]}' was added with value: "
@@ -98,3 +132,4 @@ def get_result(params: tuple, change: str) -> str:
             return same(key, v1, style, indent, ancestors)
         case 'updated':
             return updated(key, v1, v2, style, indent, ancestors)
+'''
