@@ -19,3 +19,4 @@ tests/fixtures/yaml
 tests/fixtures/json
 Makefile
 gendiff/Makefile
+
