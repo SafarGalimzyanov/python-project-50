@@ -1,4 +1,4 @@
-def added(key_order, value, updated_value) -> str:
+def plain_added(key_order, value, updated_value) -> str:
     separate_string = '.'
     text = f"Property '{separate_string.join(key_order)}' was added with value: "
 
@@ -7,16 +7,16 @@ def added(key_order, value, updated_value) -> str:
     return f'{text}{value}\n'
 
 
-def removed(key_order, value, updated_value) -> str:
+def plain_removed(key_order, value, updated_value) -> str:
     separate_string = '.'
     return f"Property '{separate_string.join(key_order)}' was removed"
 
 
-def same(key_order, value, updated_value) -> str:
+def plain_same(key_order, value, updated_value) -> str:
     return ''
 
 
-def updated(key_order, value, updated_value) -> str:
+def plain_updated(key_order, value, updated_value) -> str:
     separate_string = '.'
     text = f"Property '{separate_string.join(key_order)}' was updated. From "
 
@@ -30,10 +30,10 @@ def updated(key_order, value, updated_value) -> str:
 def plain(d: dict = {}) -> str:
     key_order, change, value, updated_value = d.values()
     change_functions = {
-            'added': added,
-            'removed': removed,
-            'same': same,
-            'updated': updated
+            'added': plain_added,
+            'removed': plain_removed,
+            'same': plain_same,
+            'updated': plain_updated
             }
 
     return change_functions.get(change)(key_order, value, updated_value)

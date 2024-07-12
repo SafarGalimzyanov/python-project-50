@@ -1,7 +1,7 @@
 import json
 import yaml
-from uniform import uniform
-from stylize import stylize
+from gendiff.stylize import stylize
+from gendiff.uniform import uniform
 
 
 def generate_diff(file1_path: str, file2_path: str, style: str = ''):
@@ -13,4 +13,5 @@ def generate_diff(file1_path: str, file2_path: str, style: str = ''):
             return json.load(f1), json.load(f2)
 
     d1, d2 = load(file1_path, file2_path)
+    return uniform(d1, d2)
     return stylize(uniform(d1, d2), style)

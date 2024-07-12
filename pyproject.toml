@@ -5,9 +5,9 @@ description = ""
 authors = ["Safar Galimzyanov <safargalimzyanov@protonme.com>"]
 readme = "README.md"
 packages = [
-	{ include = "gendiff" },
+	{ include = "gendiff"},
+	{ include = "styles"},
 	{ include = "tests"},
-	{ include = "style"}
 ]
 
 [tool.poetry.dependencies]
