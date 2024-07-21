@@ -12,7 +12,9 @@ def stylize(uniformed_dicts: list = [], style: str = 'regular') -> str:
     if style is None:
         style = 'regular'
     result = ''
+    previous_key_order = []
     for d in uniformed_dicts:
-        result += style_functions.get(style)(d)
+        result += style_functions.get(style)(d, previous_key_order)
+        previous_key_order = d.get('key_order')
 
     return result

@@ -28,7 +28,10 @@ def plain_updated(key_order, value, updated_value) -> str:
 
 
 def plain(d: dict = {}) -> str:
-    key_order, change, value, updated_value = d.values()
+    change = d.get('change')
+    key_order = d.get('key_order')
+    value = d.get('value')
+    updated_value = d.get('updated_value') if 'updated_value' in d else None
     change_functions = {
             'added': plain_added,
             'removed': plain_removed,
