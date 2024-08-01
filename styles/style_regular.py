@@ -13,53 +13,22 @@ def check_value(value):
             return value
 
 
-def get_indent(key_order: list, previous_key_order: list = []) -> str:
-    def get_index(l1: list, l2: list) -> int:
-        index = -1
-        try:
-            while l1[index + 1] == l2[index + 1]:
-                index += 1
-        except IndexError:
-            return index
-        return index
+def get_nested_indent(key_order: list, prev_key_order: list) -> int:
+    end_nested_indent = ''
+    for i, (key, prev_key) in enumerate(zip(key_order, prev_key_order)):
+        if key != prev_key:
+            return str(i) + DEFAULT_INDENT
+        #вот тут добавляем закрывающую скобку
+        end_nested_indent += DEFAULT_INDENT * (len(prev_key_order) - i)
 
-    def get_previous_indent(index: int, l: list) -> str:
-        space_indent = DEFAULT_INDENT * (len(l) - index)
-        indent = ''
-        '''
-        if len(l) - index > 1:
-            indent = f'{space_indent}}}\n'
-        '''
-        while index > 0:
-            indent += f'{space_indent}!\n'
-            index -= 1
+    start_nested_indent = ''
+    for i, key in enumerate(key_order[-1]):
+        start_nested_indent += f'{DEFAUL_INDENT*i}{key}: {\n'
 
-        return indent
+    before_key_indent = DEFAULT_INDENT * len(key_order)
 
-
-    def get_current_indent(index: int, l: list) -> str:
-        space_indent = 4 * ' '
-        indent = space_indent
-        if index > -1:
-            indent += space_indent * (index + 1)
-            space_indent += DEFAULT_INDENT * (index + 1)
-            for i in range(index+1, len(l)-1):
-                space_indent += DEFAULT_INDENT
-                indent += f'{l[i]}: {{\n{space_indent}'
-        elif index == -1 and len(l) > 1:
-            for i in range(len(l) - 1):
-                space_indent += 4 * ' '
-                indent += f'{l[i]}: {{\n{space_indent}'
-
-        return indent
-
-    index = get_index(key_order, previous_key_order)
-    previous_indent = get_previous_indent(index, previous_key_order)
-    current_indent = get_current_indent(index, key_order)
+    return end_nested_indent + start_nested_indent + before_key_indent
     
-    return previous_indent + current_indent
-    return f'index: {index}{current_indent}'
-
 
 def dict_to_str(d: dict = {}, indent: str = '') -> str:
     result = ''
@@ -97,10 +66,8 @@ def regular_same(indent, key, value, updated_value, key_order) -> str:
     return f'{text}{key}: {value}\n'
 
 
-def regular_updated(indent, key, value, updated_value, key_order) -> str:
+def regular_updated(indent, key, value, updated_value) -> str:
     text = f'{indent[:-2]}- '
-    space_indent = DEFAULT_INDENT * (len(key_order))
-    space_indent = space_indent[:-2]
     if type(value) is dict:
         if type(updated_value) is dict:
             return f'{text}{key}: {dict_to_str(value, indent)}\n{space_indent}+ {key}: {dict_to_str(updated_value, indent)}\n'
@@ -126,6 +93,6 @@ def regular(d: dict = {}, previous_key_order: list = []) -> str:
             'updated': regular_updated
             }
 
-    indent = get_indent(key_order, previous_key_order)
+    indent = get_nested_indent(key_order, previous_key_order)
     key = key_order[-1]
-    return change_functions.get(change)(indent, key, check_value(value), updated_value, key_order)
+    return change_functions.get(change)(indent, key, check_value(value), updated_value)

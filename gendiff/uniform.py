@@ -31,6 +31,7 @@ def uniform(d1: dict = {}, d2: dict = {}) -> list:
     return result
 '''
 
+'''
 def get_indent(key_order: list, value, depth: int) -> dict:
     result = {
             'len_indent': len_indent,
@@ -49,7 +50,7 @@ def get_indent(key_order: list, value, depth: int) -> dict:
     dict_indent = get_dict_indent()
 
     return {'len_inden': len_indent, 'dict_indent': dict_indent}
-
+'''
 
 def compare(d1: dict = {}, d2: dict = {}, key_order: list = [], depth: int=0) -> None:
     keys = sorted(tuple(set(d1.keys()).union(set(d2.keys()))))
@@ -59,20 +60,19 @@ def compare(d1: dict = {}, d2: dict = {}, key_order: list = [], depth: int=0) ->
         value_1 = d1.get(key)
         value_2 = d2.get(key)
         key_order[-1] = key
-        indent = get_indent(key_order, value, depth)
 
         if key in d1 and key in d2:
             if value_1 != value_2:
                 if type(value_1) is dict and type(value_2) is dict:
-                    yield from compare(value_1, value_2, deepcopy(key_order), depth)
+                    yield from compare(value_1, value_2, deepcopy(key_order))
                 else:
-                    yield ('updated', deepcopy(key_order), value_1, value_2, indent)
+                    yield ('updated', deepcopy(key_order), value_1, value_2)
             else:
-                yield ('same', deepcopy(key_order), value_1, indent)
+                yield ('same', deepcopy(key_order), value_1)
         elif key in d1 and key not in d2:
-            yield ('removed', deepcopy(key_order), value_1, indent)
+            yield ('removed', deepcopy(key_order), value_1)
         else:
-            yield ('added',  deepcopy(key_order), value_2, indent)
+            yield ('added',  deepcopy(key_order), value_2)
 
 
 def uniformed(t) -> dict:
