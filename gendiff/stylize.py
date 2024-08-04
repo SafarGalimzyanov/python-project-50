@@ -26,7 +26,14 @@ def stylize(uniformed_dicts: list = _NOT_PROVIDED, style: str = '') -> str:
 
     match style:
         case 'regular':
-            return '{\n' + result + '}'
+            index1 = result[:-1].rfind('\n')
+            index2 = result.rfind('\n')
+            l = index2 - index1 - 4 - 2
+            indent = ''
+            while l > 0:
+                l -= 4
+                indent += f'{" "*l}}}\n'
+            return '{\n' + result + indent + '}'
         case 'plain':
             return result[:-1]
         case _:

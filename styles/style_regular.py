@@ -81,10 +81,10 @@ def regular_updated(indent, key, value, updated_value, key_order) -> str:
     indent = DEFAULT_INDENT*len(key_order)
     if type(value) is dict:
         if type(updated_value) is dict:
-            return f'{text_removed}{key}: {dict_to_str(value, indent)}\n{text_added}{key}: {dict_to_str(updated_value, indent)}\n'
+            return f'{text_removed}{key}: {dict_to_str(value, indent)}\n{text_added}{key}: {{\n{dict_to_str(updated_value, indent)}\n'
         return f'{text_removed}{key}: {{\n{dict_to_str(value, indent)}\n{text_added}{key}: {updated_value}\n'
     elif type(updated_value) is dict:
-        return f'{text_removed}{key}: {value}\n{text_added}{key}: {dict_to_str(updated_value, indent)}\n'
+        return f'{text_removed}{key}: {value}\n{text_added}{key}: {{\n{dict_to_str(updated_value, indent)}\n'
     else:
         return f'{text_removed}{key}: {value}\n{text_added}{key}: {updated_value}\n'
 
