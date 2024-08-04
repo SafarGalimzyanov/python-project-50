@@ -30,10 +30,10 @@ def stylize(uniformed_dicts: list = _NOT_PROVIDED, style: str = '') -> str:
             index2 = result.rfind('\n')
             l = index2 - index1 - 4 - 2 - 4
             indent = ''
-            while l > 0:
+            while l > 4:
                 l -= 4
-                indent += f'{" "*l}!\n'
-            return '{\n' + result + indent + '?'
+                indent += f'{" "*l}}}\n'
+            return '{\n' + result + indent + '}'
         case 'plain':
             return result[:-1]
         case _:
