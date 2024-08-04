@@ -1,6 +1,22 @@
 SEPARATE_KEYS_STRING = '.'
 
 
+def check_value(value):
+    if type(value) == dict:
+        return "[complex value]"
+    match value:
+        case None:
+            return 'null'
+        case True:
+            return 'true'
+        case False:
+            return 'false'
+        case _:
+            if type(value) == str:
+                return f"'{str(value)}'" 
+            return value
+
+
 def plain_added(key_order, value, updated_value: str = '') -> str:
     text = f"Property '{SEPARATE_KEYS_STRING.join(key_order)}' was added with value: "
 
@@ -10,7 +26,7 @@ def plain_added(key_order, value, updated_value: str = '') -> str:
 
 
 def plain_removed(key_order, value, updated_value: str = '') -> str:
-    return f"Property '{SEPARATE_KEYS_STRING.join(key_order)}' was removed"
+    return f"Property '{SEPARATE_KEYS_STRING.join(key_order)}' was removed\n"
 
 
 def plain_same(key_order, value, updated_value) -> str:
@@ -21,6 +37,8 @@ def plain_updated(key_order, value, updated_value: str = '') -> str:
     text = f"Property '{SEPARATE_KEYS_STRING.join(key_order)}' was updated. From "
 
     if type(value) is dict:
+        if type(updated_value) is dict:
+            return f'{text}[complex value] to [complex value]\"'
         return f'{text}[complex value] to {updated_value}\n'
     if type(updated_value) is dict:
         return f'{text}{value} to [complex value]\n'
@@ -39,4 +57,4 @@ def plain(d: dict = {}, *args) -> str:
             'updated': plain_updated
             }
 
-    return change_functions.get(change)(key_order, value, updated_value)
+    return change_functions.get(change)(key_order, check_value(value), check_value(updated_value))

@@ -3,7 +3,12 @@ from styles.style_regular import regular
 from styles.style_json import json_
 
 
-def stylize(uniformed_dicts: list = [], style: str = 'regular') -> str:
+_NOT_PROVIDED = object()
+
+def stylize(uniformed_dicts: list = _NOT_PROVIDED, style: str = 'regular') -> str:
+    if uniformed_dicts is _NOT_PROVIDED:
+        uniformed_dicts = []
+
     style_functions = {
             'plain': plain,
             'regular': regular,
@@ -18,6 +23,10 @@ def stylize(uniformed_dicts: list = [], style: str = 'regular') -> str:
         result += style_functions.get(style)(d, previous_key_order)
         previous_key_order = d.get('key_order')
 
-    if style == 'regular':
-        return '{\n' + result + '}'
-    return result
+    match style:
+        case 'regular':
+            return '{\n' + result + '}'
+        case 'plain':
+            return result[:-1]
+        case json:
+            return result

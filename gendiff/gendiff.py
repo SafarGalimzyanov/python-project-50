@@ -4,13 +4,15 @@ from gendiff.stylize import stylize
 from gendiff.uniform import uniform
 
 
-def generate_diff(file1_path: str, file2_path: str, style: str = ''):
-    def load(file1_path: str, file2_path: str) -> str:
-        file_format = file1_path.split('.')[-1]
-        with open(file1_path, 'r') as f1, open(file2_path, 'r') as f2:
-            if file_format in ('yaml', 'yml'):
-                return yaml.safe_load(f1), yaml.safe_load(f2)
-            return json.load(f1), json.load(f2)
+def load(file_path: str):
+    file_format = file_path[-4:]
+    with open(file_path, 'r') as f:
+        if file_format in ('yaml', 'yml'):
+            return yaml.safe_load(f)
+        return json.load(f)
 
-    d1, d2 = load(file1_path, file2_path)
+def generate_diff(file1_path: str, file2_path: str, style: str = ''):
+    d1, d2 = load(file1_path), load(file2_path)
+    if style == 'json':
+        return json.dumps({'file1': d1, 'file2': d2})
     return stylize(uniform(d1, d2), style)

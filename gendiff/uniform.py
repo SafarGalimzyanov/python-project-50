@@ -1,7 +1,10 @@
 from copy import deepcopy
 
+_NOT_PROVIDED = object()
 
-def compare(d1: dict = {}, d2: dict = {}, key_order: list = []) -> None:
+def compare(d1: dict = {}, d2: dict = {}, key_order: list = _NOT_PROVIDED) -> None:
+    if key_order is _NOT_PROVIDED:
+        key_order = []
     keys = sorted(tuple(set(d1.keys()).union(set(d2.keys()))))
     key_order.append(keys[0])
     for key in keys:
@@ -11,7 +14,7 @@ def compare(d1: dict = {}, d2: dict = {}, key_order: list = []) -> None:
 
         if key in d1 and key in d2:
             if value_1 != value_2:
-                if type(value_1) is dict and type(value_2) is dict:
+                if isinstance(value_1, dict) and isinstance(value_2, dict):
                     yield from compare(value_1, value_2, deepcopy(key_order))
                 else:
                     yield ('updated', deepcopy(key_order), value_1, value_2)

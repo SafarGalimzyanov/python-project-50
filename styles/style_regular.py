@@ -1,3 +1,5 @@
+_NOT_PROVIDED = object()
+
 DEFAULT_INDENT_LEN = 4
 DEFAULT_INDENT = DEFAULT_INDENT_LEN * ' '
 TEST_INDENT = '****'
@@ -87,7 +89,10 @@ def regular_updated(indent, key, value, updated_value, key_order) -> str:
         return f'{text_removed}{key}: {value}\n{text_added}{key}: {updated_value}\n'
 
 
-def regular(d: dict = {}, previous_key_order: list = []) -> str:
+def regular(d: dict = {}, prev_key_order: list = []) -> str:
+    if prev_key_order is _NOT_PROVIDED:
+        prev_ley_order = []
+
     change = d.get('change')
     key_order = d.get('key_order')
     value = d.get('value')
@@ -100,6 +105,6 @@ def regular(d: dict = {}, previous_key_order: list = []) -> str:
             'updated': regular_updated
             }
 
-    indent = get_nested_indent(key_order, previous_key_order)
+    indent = get_nested_indent(key_order, prev_key_order)
     key = key_order[-1]
     return change_functions.get(change)(indent, key, check_value(value), check_value(updated_value), key_order)
