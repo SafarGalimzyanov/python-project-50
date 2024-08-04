@@ -1,8 +1,10 @@
 from copy import deepcopy
 
+
 _NOT_PROVIDED = object()
 
-def compare(d1: dict = {}, d2: dict = {}, key_order: list = _NOT_PROVIDED) -> None:
+
+def compare(d1: dict = {}, d2: dict = {}, key_order: list = _NOT_PROVIDED):
     if key_order is _NOT_PROVIDED:
         key_order = []
     keys = sorted(tuple(set(d1.keys()).union(set(d2.keys()))))

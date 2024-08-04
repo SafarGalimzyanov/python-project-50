@@ -12,7 +12,7 @@ DIFF_JSON_FORMAT = get_text('tests/fixtures/test_json_format.json')
 JSON_1 = 'tests/fixtures/json/file1.json'
 JSON_2 = 'tests/fixtures/json/file2.json'
 YAML_1 = 'tests/fixtures/yaml/file1.yaml'
-YAML_2 = 'tests/fixtures/yaml/file2.yaml'
+YAML_2 = 'tests/fixtures/yaml/file2.yml'
 
 
 def test_gendiff_json_default_style():

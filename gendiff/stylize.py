@@ -5,7 +5,8 @@ from styles.style_json import json_
 
 _NOT_PROVIDED = object()
 
-def stylize(uniformed_dicts: list = _NOT_PROVIDED, style: str = 'regular') -> str:
+
+def stylize(uniformed_dicts: list = _NOT_PROVIDED, style: str = '') -> str:
     if uniformed_dicts is _NOT_PROVIDED:
         uniformed_dicts = []
 
@@ -28,5 +29,5 @@ def stylize(uniformed_dicts: list = _NOT_PROVIDED, style: str = 'regular') -> st
             return '{\n' + result + '}'
         case 'plain':
             return result[:-1]
-        case json:
+        case _:
             return result
