@@ -1,5 +1,5 @@
 from gendiff import generate_diff
-from uniform.py import uniform
+
 
 def get_text(file_path: str):
     with open(file_path, 'r') as f:
@@ -12,12 +12,9 @@ DIFF_PLAIN_FORMAT = get_text('tests/fixtures/test_plain_format')
 DIFF_JSON_FORMAT = get_text('tests/fixtures/test_json_format.json')
 JSON_1 = 'tests/fixtures/json/file1.json'
 JSON_2 = 'tests/fixtures/json/file2.json'
-YAML_1 = 'tests/fixtures/yaml/file1.yml'
+YAML_1 = 'tests/fixtures/yaml/file1.yaml'
 YAML_2 = 'tests/fixtures/yaml/file2.yaml'
 
-
-def test_uniform():
-    assert un
 
 def test_gendiff_json_default_style():
     assert generate_diff(JSON_1, JSON_2) == DIFF_DEFAULT_FORMAT

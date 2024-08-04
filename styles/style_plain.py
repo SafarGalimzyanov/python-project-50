@@ -1,37 +1,37 @@
-def plain_added(key_order, value, updated_value) -> str:
-    separate_string = '.'
-    text = f"Property '{separate_string.join(key_order)}' was added with value: "
+SEPARATE_KEYS_STRING = '.'
 
-    if type(v2) is dict:
+
+def plain_added(key_order, value, updated_value: str = '') -> str:
+    text = f"Property '{SEPARATE_KEYS_STRING.join(key_order)}' was added with value: "
+
+    if type(updated_value) is dict:
         return f'{text}[complex value]\n'
     return f'{text}{value}\n'
 
 
-def plain_removed(key_order, value, updated_value) -> str:
-    separate_string = '.'
-    return f"Property '{separate_string.join(key_order)}' was removed"
+def plain_removed(key_order, value, updated_value: str = '') -> str:
+    return f"Property '{SEPARATE_KEYS_STRING.join(key_order)}' was removed"
 
 
 def plain_same(key_order, value, updated_value) -> str:
     return ''
 
 
-def plain_updated(key_order, value, updated_value) -> str:
-    separate_string = '.'
-    text = f"Property '{separate_string.join(key_order)}' was updated. From "
+def plain_updated(key_order, value, updated_value: str = '') -> str:
+    text = f"Property '{SEPARATE_KEYS_STRING.join(key_order)}' was updated. From "
 
-    if type(v1) is dict:
+    if type(value) is dict:
         return f'{text}[complex value] to {updated_value}\n'
-    if type(v2) is dict:
+    if type(updated_value) is dict:
         return f'{text}{value} to [complex value]\n'
     return f'{text}{value} to {updated_value}\n'
 
 
-def plain(d: dict = {}) -> str:
+def plain(d: dict = {}, *args) -> str:
     change = d.get('change')
     key_order = d.get('key_order')
     value = d.get('value')
-    updated_value = d.get('updated_value') if 'updated_value' in d else None
+    updated_value = d.get('updated_value')
     change_functions = {
             'added': plain_added,
             'removed': plain_removed,
