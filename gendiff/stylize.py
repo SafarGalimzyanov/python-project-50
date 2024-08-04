@@ -32,8 +32,8 @@ def stylize(uniformed_dicts: list = _NOT_PROVIDED, style: str = '') -> str:
             indent = ''
             while l > 0:
                 l -= 4
-                indent += f'{" "*l}}}\n'
-            return '{\n' + result + indent + '}'
+                indent += f'{" "*l}!\n'
+            return '{\n' + result + indent + '?'
         case 'plain':
             return result[:-1]
         case _:
