@@ -28,7 +28,7 @@ def stylize(uniformed_dicts: list = _NOT_PROVIDED, style: str = '') -> str:
         case 'regular':
             index1 = result[:-1].rfind('\n')
             index2 = result.rfind('\n')
-            l = index2 - index1 - 4 - 2
+            l = index2 - index1 - 4 - 2 - 4
             indent = ''
             while l > 0:
                 l -= 4
