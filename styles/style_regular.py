@@ -4,6 +4,7 @@ DEFAULT_INDENT_LEN = 4
 DEFAULT_INDENT = DEFAULT_INDENT_LEN * ' '
 TEST_INDENT = '****'
 
+
 def check_value(value):
     match value:
         case None:
@@ -24,11 +25,11 @@ def get_nested_indent(key_order: list, prev_key_order: list) -> int:
         if key != prev_key:
             break
     for i in range(1, lp-index):
-        end_nested_indent += f'{DEFAULT_INDENT*(len(prev_key_order)-i)}}}\n'
+        end_nested_indent += f'{DEFAULT_INDENT * (len(prev_key_order) - i)}}}\n'
     
     start_nested_indent = ''
-    for i in range(index, len(key_order)-1):
-        start_nested_indent += f'{DEFAULT_INDENT*(i+1)}{key_order[i]}: {{\n'
+    for i in range(index, len(key_order) - 1):
+        start_nested_indent += f'{DEFAULT_INDENT * (i + 1)}{key_order[i]}: {{\n'
 
     before_key_indent = DEFAULT_INDENT*len(key_order)
 
@@ -52,7 +53,7 @@ def dict_to_str(d: dict = {}, indent: str = '') -> str:
 
 def regular_added(indent, key, value, updated_value, key_order) -> str:
     text = f'{indent[:-2]}+ '
-    indent = DEFAULT_INDENT*len(key_order)
+    indent = DEFAULT_INDENT * len(key_order)
     if type(value) is dict:
         return f'{text}{key}: {{\n{dict_to_str(value, indent)}\n'
     return f'{text}{key}: {value}\n'
@@ -60,7 +61,7 @@ def regular_added(indent, key, value, updated_value, key_order) -> str:
 
 def regular_removed(indent, key, value, updated_value, key_order) -> str:
     text = f'{indent[:-2]}- '
-    indent = DEFAULT_INDENT*len(key_order)
+    indent = DEFAULT_INDENT * len(key_order)
     if type(value) is dict:
         return f'{text}{key}: {{\n{dict_to_str(value, indent)}\n'
     return f'{text}{key}: {value}\n'
@@ -68,7 +69,7 @@ def regular_removed(indent, key, value, updated_value, key_order) -> str:
 
 def regular_same(indent, key, value, updated_value, key_order) -> str:
     text = f'{indent}'
-    indent = DEFAULT_INDENT*len(key_order)
+    indent = DEFAULT_INDENT * len(key_order)
     if type(value) is dict:
         return f'{text}{key}: {{\n{dict_to_str(value, indent)}\n'
     return f'{text}{key}: {value}\n'
@@ -76,9 +77,9 @@ def regular_same(indent, key, value, updated_value, key_order) -> str:
 
 def regular_updated(indent, key, value, updated_value, key_order) -> str:
     text_removed = f'{indent[:-2]}- '
-    text_added = DEFAULT_INDENT*len(key_order)
+    text_added = DEFAULT_INDENT * len(key_order)
     text_added = text_added[:-2] + '+ '
-    indent = DEFAULT_INDENT*len(key_order)
+    indent = DEFAULT_INDENT * len(key_order)
     if type(value) is dict:
         if type(updated_value) is dict:
             return f'{text_removed}{key}: {dict_to_str(value, indent)}\n{text_added}{key}: {{\n{dict_to_str(updated_value, indent)}\n'
@@ -91,7 +92,7 @@ def regular_updated(indent, key, value, updated_value, key_order) -> str:
 
 def regular(d: dict = {}, prev_key_order: list = []) -> str:
     if prev_key_order is _NOT_PROVIDED:
-        prev_ley_order = []
+        prev_key_order = []
 
     change = d.get('change')
     key_order = d.get('key_order')

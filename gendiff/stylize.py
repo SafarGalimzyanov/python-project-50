@@ -11,10 +11,10 @@ def stylize(uniformed_dicts: list = _NOT_PROVIDED, style: str = '') -> str:
         uniformed_dicts = []
 
     style_functions = {
-            'plain': plain,
-            'regular': regular,
-            'json': json_,
-            }
+                'plain': plain,
+                'regular': regular,
+                'json': json_,
+                }
     if style not in style_functions:
         style = 'regular'
 
@@ -26,9 +26,7 @@ def stylize(uniformed_dicts: list = _NOT_PROVIDED, style: str = '') -> str:
 
     match style:
         case 'regular':
-            index1 = result[:-1].rfind('\n')
-            index2 = result.rfind('\n')
-            l = index2 - index1 - 4 - 2 - 4
+            l = result.rfind('\n') - result[:-1].rfind('\n') - 10
             indent = ''
             while l > 4:
                 l -= 4

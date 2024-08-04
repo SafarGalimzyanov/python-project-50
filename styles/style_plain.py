@@ -2,7 +2,7 @@ SEPARATE_KEYS_STRING = '.'
 
 
 def check_value(value):
-    if type(value) == dict:
+    if isinstance(value, dict):
         return "[complex value]"
     match value:
         case None:
@@ -12,8 +12,8 @@ def check_value(value):
         case False:
             return 'false'
         case _:
-            if type(value) == str:
-                return f"'{str(value)}'" 
+            if isinstance(value, str):
+                return f"'{str(value)}'"
             return value
 
 

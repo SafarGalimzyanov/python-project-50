@@ -25,23 +25,14 @@ def compare(d1: dict = {}, d2: dict = {}, key_order: list = _NOT_PROVIDED):
         elif key in d1 and key not in d2:
             yield ('removed', deepcopy(key_order), value_1)
         else:
-            yield ('added',  deepcopy(key_order), value_2)
+            yield ('added', deepcopy(key_order), value_2)
 
 
 def uniformed(t) -> dict:
     change, key_order, value, *updated_value = t
     if not updated_value:
-        return {
-                'change': change,
-                'key_order': key_order,
-                'value': value,
-            }
-    return {
-            'change': change,
-            'key_order': key_order,
-            'value': value,
-            'updated_value': updated_value[0]
-        }
+        return {'change': change, 'key_order': key_order, 'value': value}
+    return {'change': change, 'key_order': key_order, 'value': value, 'updated_value': updated_value[0]}
 
 
 def uniform(d1: dict = {}, d2: dict = {}) -> list:
