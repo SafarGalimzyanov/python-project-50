@@ -24,9 +24,9 @@ def get_nested_indent(key_order: list, prev_key_order: list) -> int:
     for index, (key, prev_key) in enumerate(zip(key_order, prev_key_order)):
         if key != prev_key:
             break
-    for i in range(1, lp-index):
+    for i in range(1, lp - index):
         end_nested_indent += f'{DEFAULT_INDENT * (len(prev_key_order) - i)}}}\n'
- 
+
     start_nested_indent = ''
     for i in range(index, len(key_order) - 1):
         start_nested_indent += f'{DEFAULT_INDENT * (i + 1)}{key_order[i]}: {{\n'
