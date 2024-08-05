@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "hexlet-code"
 version = "0.1.0"
-description = ""
+description = "In this project, the focus is on practicing work with collections. Methods for constructing and traversing trees will be studied. Various data formats (JSON, YAML) will be introduced, with an emphasis on parsing and generating them. Test writing using pytest will be initiated, along with mastering test-driven development (TDD). Additionally, the project includes familiarization with continuous integration (CI) and elements of extreme programming (XP)."
 authors = ["Safar Galimzyanov <safargalimzyanov@protonme.com>"]
 readme = "README.md"
 packages = [
@@ -16,7 +16,6 @@ pyyaml = "^6.0.1"
 
 [tool.poetry.scripts]
 gendiff = "gendiff.scripts.gendiff_script:main"
-
 
 [tool.poetry.group.dev.dependencies]
 flake8 = "^6.1.0"
