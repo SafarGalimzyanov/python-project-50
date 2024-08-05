@@ -50,11 +50,6 @@ def plain(d: dict = {}, *args) -> str:
     key_order = d.get('key_order')
     value = d.get('value')
     updated_value = d.get('updated_value')
-    change_functions = {
-            'added': plain_added,
-            'removed': plain_removed,
-            'same': plain_same,
-            'updated': plain_updated
-            }
+    change_functions = {'added': plain_added, 'removed': plain_removed, 'same': plain_same, 'updated': plain_updated}
 
     return change_functions.get(change)(key_order, check_value(value), check_value(updated_value))

@@ -6,6 +6,7 @@ def get_text(file_path: str):
         data = f.read()
     return data.strip()
 
+
 DIFF_DEFAULT_FORMAT = get_text('tests/fixtures/test_default_format')
 DIFF_PLAIN_FORMAT = get_text('tests/fixtures/test_plain_format')
 DIFF_JSON_FORMAT = get_text('tests/fixtures/test_json_format.json')

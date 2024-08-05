@@ -26,12 +26,12 @@ def get_nested_indent(key_order: list, prev_key_order: list) -> int:
             break
     for i in range(1, lp-index):
         end_nested_indent += f'{DEFAULT_INDENT * (len(prev_key_order) - i)}}}\n'
-    
+ 
     start_nested_indent = ''
     for i in range(index, len(key_order) - 1):
         start_nested_indent += f'{DEFAULT_INDENT * (i + 1)}{key_order[i]}: {{\n'
 
-    before_key_indent = DEFAULT_INDENT*len(key_order)
+    before_key_indent = DEFAULT_INDENT * len(key_order)
 
     return end_nested_indent + start_nested_indent + before_key_indent
 
@@ -99,12 +99,7 @@ def regular(d: dict = {}, prev_key_order: list = []) -> str:
     value = d.get('value')
     updated_value = d.get('updated_value') if 'updated_value' in d else None
 
-    change_functions = {
-            'added': regular_added,
-            'removed': regular_removed,
-            'same': regular_same,
-            'updated': regular_updated
-            }
+    change_functions = {'added': regular_added, 'removed': regular_removed, 'same': regular_same, 'updated': regular_updated}
 
     indent = get_nested_indent(key_order, prev_key_order)
     key = key_order[-1]
