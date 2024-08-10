@@ -14,6 +14,8 @@ def load(file_path: str):
 
 def generate_diff(file1_path: str, file2_path: str, style: str = ''):
     d1, d2 = load(file1_path), load(file2_path)
+    if not d1 and not d2:
+        return ''
     if style == 'json':
         return json.dumps({'file1': d1, 'file2': d2})
     return stylize(uniform(d1, d2), style)

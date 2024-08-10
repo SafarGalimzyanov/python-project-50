@@ -1,0 +1,49 @@
+{
+  "common": {
+    "follow": false,
+    "setting1": "Value 1",
+    "setting3": {
+      "key": "value"
+    },
+    "setting4": "blah blah",
+    "setting5": {
+      "key5": "value5"
+    },
+    "setting6": {
+      "key": "value",
+      "ops": "vops",
+      "doge": {
+        "wow": "so much"
+      }
+    }
+  },
+  "group1": {
+    "foo": "bar",
+    "baz": "bars",
+    "nest": "str"
+  },
+  "group3": {
+    "deep": {
+      "id": {
+        "number": 45
+      }
+    },
+    "fee": 100500
+  },
+  "group4": {
+    "p1": "s1",
+    "key1": {
+      "key2": {
+        "p3": "s3",
+        "key3": {
+          "key4": {
+            "python": "big snake",
+	    "p2": "s2",
+	    "p3": "s3",
+	    "p4": "s4"
+	  }
+	}
+      }
+    }
+  }
+}
