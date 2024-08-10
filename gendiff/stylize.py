@@ -5,19 +5,12 @@ from styles.style_json import json_
 
 _NOT_PROVIDED = object()
 
-'''
-def edit_regular(result: str) -> str:
-    for i in range(result.rfind('}\n') - result[:-1].rfind('\n') - 14, 0, -4):
-        result += f'{"-" * i}}}\n'
-    return '{\n' + result + '}'
-'''
-
 
 def edit_regular(result: str) -> str:
     last_newline_index = result.rfind('\n')
     second_last_newline_index = result.rfind('\n', 0, last_newline_index)
     last_str = result[second_last_newline_index + 1:last_newline_index]
-    
+
     possible_starts = ('    ', '  - ', '  + ')
     index = 0
     while last_str[index:4 + index] in possible_starts:

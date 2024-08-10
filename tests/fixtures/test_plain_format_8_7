@@ -1,0 +1,3 @@
+Property 'key1' was added with value: 'value1'
+Property 'key2' was added with value: 'value2'
+Property 'key3' was updated. From [complex value] to 'value3'

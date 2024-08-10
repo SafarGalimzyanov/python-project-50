@@ -19,7 +19,7 @@ DIFF_DEFAULT_FORMAT_9_10 = get_text('tests/fixtures/test_default_format_9_10')
 DIFF_DEFAULT_FORMAT_10_9 = get_text('tests/fixtures/test_default_format__10_9')
 DIFF_DEFAULT_FORMAT_11_12 = get_text('tests/fixtures/test_default_format__11_12')
 DIFF_DEFAULT_FORMAT_12_11 = get_text('tests/fixtures/test_default_format__12_11')
-'''
+
 DIFF_PLAIN_FORMAT_1_2 = get_text('tests/fixtures/test_plain_format_1_2')
 DIFF_PLAIN_FORMAT_2_1 = get_text('tests/fixtures/test_plain_format_2_1')
 DIFF_PLAIN_FORMAT_3_4 = get_text('tests/fixtures/test_plain_format_3_4')
@@ -34,7 +34,7 @@ DIFF_PLAIN_FORMAT_11_12 = get_text('tests/fixtures/test_plain_format__11_12')
 DIFF_PLAIN_FORMAT_12_11 = get_text('tests/fixtures/test_plain_format__12_11')
 
 DIFF_JSON_FORMAT = get_text('tests/fixtures/test_json_format.json')
-'''
+
 JSON_1 = 'tests/fixtures/json/file1.json'
 JSON_2 = 'tests/fixtures/json/file2.json'
 JSON_3 = 'tests/fixtures/json/file3.json'
@@ -47,7 +47,7 @@ JSON_9 = 'tests/fixtures/json/file9.json'
 JSON_10 = 'tests/fixtures/json/file_10.json'
 JSON_11 = 'tests/fixtures/json/file_11.json'
 JSON_12 = 'tests/fixtures/json/file_12.json'
-'''
+
 YAML_1 = 'tests/fixtures/yaml/file1.yaml'
 YAML_2 = 'tests/fixtures/yaml/file2.yml'
 YAML_3 = 'tests/fixtures/yaml/file3.yaml'
@@ -60,7 +60,7 @@ YAML_9 = 'tests/fixtures/yaml/file9.yaml'
 YAML_10 = 'tests/fixtures/yaml/file_10.yml'
 YAML_11 = 'tests/fixtures/yaml/file_11.yaml'
 YAML_12 = 'tests/fixtures/yaml/file_12.yml'
-'''
+
 
 def test_gendiff_json_regular_style():
     assert generate_diff(JSON_1, JSON_2) == DIFF_DEFAULT_FORMAT_1_2
@@ -76,7 +76,7 @@ def test_gendiff_json_regular_style():
     assert generate_diff(JSON_11, JSON_12) == DIFF_DEFAULT_FORMAT_11_12
     assert generate_diff(JSON_12, JSON_11) == DIFF_DEFAULT_FORMAT_12_11
 
-'''
+
 def test_gendiff_yaml_regular_style():
     assert generate_diff(YAML_1, YAML_2) == DIFF_DEFAULT_FORMAT_1_2
     assert generate_diff(YAML_2, YAML_1) == DIFF_DEFAULT_FORMAT_2_1
@@ -123,6 +123,4 @@ def test_gendiff_yaml_plain_style():
 
 
 def test_gendiff_json_json_style():
-    assert generate_diff(JSON_9, JSON_10, 'json') == DIFF_JSON_FORMAT_9_10
-
-'''
+    assert generate_diff(JSON_9, JSON_10, 'json') == DIFF_JSON_FORMAT
