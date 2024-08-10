@@ -1,10 +1,24 @@
+import json
+import yaml
 from gendiff import generate_diff
+from gendiff.uniform import uniform
+
+
+def load(file_path1: str, file_path2: str):
+    file_format = file_path1.split('.')[-1]
+    with open(file_path1, 'r') as f1, open(file_path2, 'r') as f2:
+        if file_format in ('yaml', 'yml'):
+            return yaml.safe_load(f1), yaml.safe_load(f2)
+        return json.load(f1), json.load(f2)
 
 
 def get_text(file_path: str):
     with open(file_path, 'r') as f:
         data = f.read()
     return data.strip()
+
+
+UNIFORM_1_2 = get_text('tests/fixtures/test_uniform_1_2')
 
 
 DIFF_DEFAULT_FORMAT_1_2 = get_text('tests/fixtures/test_default_format_1_2')
@@ -124,3 +138,7 @@ def test_gendiff_yaml_plain_style():
 
 def test_gendiff_json_json_style():
     assert generate_diff(JSON_9, JSON_10, 'json') == DIFF_JSON_FORMAT
+
+
+def test_uniform():
+    assert uniform(*load(JSON_1, JSON_2)) == []

@@ -36,4 +36,6 @@ def uniformed(t) -> dict:
 
 
 def uniform(d1: dict = {}, d2: dict = {}) -> list:
+    if not d1 and not d2:
+        return []
     return [uniformed(result) for result in list(compare(d1, d2))]
