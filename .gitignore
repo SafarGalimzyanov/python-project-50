@@ -1,5 +1,6 @@
 __pycache__/
 *.swp
+*.whl
 *-temp.py
 _temp/
 dist/

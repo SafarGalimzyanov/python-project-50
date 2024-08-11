@@ -1,5 +1,5 @@
 import json
 
 
-def json_(l: list):
-    return json.dumps(l)
+def json_(_: list):
+    return json.dumps(_)
