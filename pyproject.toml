@@ -6,7 +6,7 @@ authors = ["Safar Galimzyanov <safargalimzyanov@protonme.com>"]
 readme = "README.md"
 packages = [
 	{ include = "gendiff"},
-	{ include = "gendiff.styles"},
+	{ include = "styles"},
 	{ include = "tests"},
 ]
 
