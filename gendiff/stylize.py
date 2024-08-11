@@ -1,9 +1,7 @@
-from styles.style_plain import plain
-from styles.style_regular import regular
-from styles.style_json import json_
-
-
-_NOT_PROVIDED = object()
+from gendiff.styles.style_plain import plain
+from gendiff.styles.style_regular import regular
+from gendiff.styles.style_json import json_
+from typing import Optional
 
 
 def edit_regular(result: str) -> str:
@@ -21,13 +19,15 @@ def edit_regular(result: str) -> str:
     return '{\n' + result + '}'
 
 
-def stylize(uniformed_dicts: list = _NOT_PROVIDED, style: str = '') -> str:
-    if uniformed_dicts is _NOT_PROVIDED:
+def stylize(uniformed_dicts: Optional[list] = None, style: str = '') -> str:
+    if uniformed_dicts is None:
         uniformed_dicts = []
 
     style_functions = {'plain': plain, 'regular': regular, 'json': json_}
     if style not in style_functions:
         style = 'regular'
+    elif style == 'json':
+        return style_functions.get('json')(uniformed_dicts)
 
     result = ''
     previous_key_order = []

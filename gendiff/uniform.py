@@ -1,11 +1,9 @@
 from copy import deepcopy
+from typing import Optional
 
 
-_NOT_PROVIDED = object()
-
-
-def compare(d1: dict = {}, d2: dict = {}, key_order: list = _NOT_PROVIDED):
-    if key_order is _NOT_PROVIDED:
+def compare(d1: dict = {}, d2: dict = {}, key_order: Optional[list] = None):
+    if key_order is None:
         key_order = []
     keys = sorted(tuple(set(d1.keys()).union(set(d2.keys()))))
     key_order.append(keys[0])
@@ -28,7 +26,7 @@ def compare(d1: dict = {}, d2: dict = {}, key_order: list = _NOT_PROVIDED):
             yield ('added', deepcopy(key_order), value_2)
 
 
-def uniformed(t) -> dict:
+def turn_to_dict(t) -> dict:
     change, key_order, value, *updated_value = t
     if not updated_value:
         return {'change': change, 'key_order': key_order, 'value': value}
@@ -38,4 +36,4 @@ def uniformed(t) -> dict:
 def uniform(d1: dict = {}, d2: dict = {}) -> list:
     if not d1 and not d2:
         return []
-    return [uniformed(result) for result in list(compare(d1, d2))]
+    return [turn_to_dict(result) for result in list(compare(d1, d2))]

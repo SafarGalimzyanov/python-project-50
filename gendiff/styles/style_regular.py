@@ -1,4 +1,5 @@
-_NOT_PROVIDED = object()
+from typing import Optional
+
 
 DEFAULT_INDENT_LEN = 4
 DEFAULT_INDENT = DEFAULT_INDENT_LEN * ' '
@@ -56,7 +57,8 @@ def regular_added(indent, key, value, updated_value, key_order) -> str:
     indent = DEFAULT_INDENT * len(key_order)
     if type(value) is dict:
         return f'{text}{key}: {{\n{dict_to_str(value, indent)}\n'
-    return f'{text}{key}: {value}\n'
+    else:
+        return f'{text}{key}: {value}\n'
 
 
 def regular_removed(indent, key, value, updated_value, key_order) -> str:
@@ -90,8 +92,8 @@ def regular_updated(indent, key, value, updated_value, key_order) -> str:
         return f'{text_removed}{key}: {value}\n{text_added}{key}: {updated_value}\n'
 
 
-def regular(d: dict = {}, prev_key_order: list = []) -> str:
-    if prev_key_order is _NOT_PROVIDED:
+def regular(d: dict = {}, prev_key_order: Optional[list] = []) -> str:
+    if prev_key_order is None:
         prev_key_order = []
 
     change = d.get('change')
